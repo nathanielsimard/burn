@@ -1,4 +1,6 @@
 use crate::backend::Backend;
+use crate::{Dense, Sparse, TensorRepr};
+use core::marker::PhantomData;
 
 /// A type-level representation of the kind of a float tensor
 #[derive(Clone, Debug)]
