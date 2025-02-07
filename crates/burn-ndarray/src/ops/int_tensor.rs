@@ -418,4 +418,8 @@ impl<E: FloatNdArrayElement, I: IntNdArrayElement, Q: QuantElement> IntTensorOps
             (a.elem::<i64>() >> rhs.elem::<u32>()).elem()
         })
     }
+
+    fn int_cumsum(tensor: NdArrayTensor<I>, dim: usize) -> NdArrayTensor<I> {
+        NdArrayMathOps::cumsum(tensor, dim)
+    }
 }

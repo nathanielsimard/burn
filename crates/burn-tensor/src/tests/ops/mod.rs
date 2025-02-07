@@ -18,6 +18,7 @@ mod clamp;
 mod close;
 mod cos;
 mod create_like;
+mod cumsum;
 mod div;
 mod erf;
 mod exp;

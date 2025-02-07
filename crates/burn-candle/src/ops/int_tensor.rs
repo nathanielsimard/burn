@@ -372,6 +372,7 @@ impl<F: FloatCandleElement, I: IntCandleElement> IntTensorOps<Self> for Candle<F
     fn int_sign(tensor: IntTensor<Self>) -> IntTensor<Self> {
         sign(tensor)
     }
+
     fn bitwise_and(lhs: IntTensor<Self>, rhs: IntTensor<Self>) -> IntTensor<Self> {
         unimplemented!("bitwise_and is not implemented for Candle IntTensor");
     }
@@ -414,5 +415,9 @@ impl<F: FloatCandleElement, I: IntCandleElement> IntTensorOps<Self> for Candle<F
 
     fn bitwise_right_shift_scalar(lhs: IntTensor<Self>, rhs: IntElem<Self>) -> IntTensor<Self> {
         unimplemented!("bitwise_right_shift_scalar is not implemented for Candle IntTensor");
+    }
+
+    fn int_cumsum(tensor: IntTensor<Self>, dim: usize) -> IntTensor<Self> {
+        super::base::cumsum(tensor, dim)
     }
 }

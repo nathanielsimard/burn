@@ -475,4 +475,8 @@ impl<E: TchElement, Q: QuantElement> IntTensorOps<Self> for LibTorch<E, Q> {
     ) -> IntTensor<Self> {
         TchOps::bitwise_right_shift_scalar(lhs, rhs)
     }
+
+    fn int_cumsum(tensor: IntTensor<Self>, dim: usize) -> IntTensor<Self> {
+        TchOps::cumsum(tensor, dim)
+    }
 }

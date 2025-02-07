@@ -342,4 +342,8 @@ where
     fn bitwise_right_shift_scalar(lhs: IntTensor<Self>, rhs: IntElem<Self>) -> IntTensor<Self> {
         launch_scalar_binop_int::<R, I, BitwiseShrOp>(lhs, rhs)
     }
+
+    fn int_cumsum(_tensor: IntTensor<Self>, _dim: usize) -> IntTensor<Self> {
+        todo!()
+    }
 }
