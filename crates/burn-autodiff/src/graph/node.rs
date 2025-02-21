@@ -1,5 +1,5 @@
-use std::sync::atomic::{AtomicU64, Ordering};
-use std::sync::Arc;
+use alloc::{sync::Arc, vec::Vec};
+use portable_atomic::{AtomicU64, Ordering};
 
 use crate::checkpoint::retro_forward::RetroForward;
 use crate::runtime::AutodiffClientImpl;
