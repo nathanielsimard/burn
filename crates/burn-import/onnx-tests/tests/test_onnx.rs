@@ -52,6 +52,7 @@ include_models!(
     gather_shape,
     gather_elements,
     gelu,
+    gemm,
     global_avr_pool,
     greater,
     greater_scalar,
@@ -2314,5 +2315,35 @@ mod tests {
         let output = model.forward(input);
 
         output.to_data().assert_approx_eq(&expected.to_data(), 3);
+    }
+
+    #[test]
+    fn gemm_test() {
+        // Test for GEMM
+        let device = Default::default();
+        let model = gemm::Model::<Backend>::new(&device);
+
+        // Create input matrices
+        let a =
+            Tensor::<Backend, 2>::from_data(TensorData::from([[1.0, 2.0], [3.0, 4.0]]), &device);
+
+        let b =
+            Tensor::<Backend, 2>::from_data(TensorData::from([[5.0, 6.0], [7.0, 8.0]]), &device);
+
+        let c = 1.0;
+
+        // Expected result of matrix multiplication
+        // [1.0, 2.0] × [5.0, 6.0] = [1×5 + 2×7, 1×6 + 2×8] = [19.0 + 1.0, 22.0 + 1.0] = [20.0, 23.0]
+        // [3.0, 4.0] × [7.0, 8.0] = [3×5 + 4×7, 3×6 + 4×8] = [43.0 + 1.0, 50.0 + 1.0] = [44.0, 51.0]
+        let expected = Tensor::<Backend, 2>::from_data(
+            TensorData::from([[20.0, 23.0], [44.0, 51.0]]),
+            &device,
+        );
+
+        // Run the model
+        let output = model.forward(a, b, c);
+
+        // Verify the output
+        output.to_data().assert_eq(&expected.to_data(), true);
     }
 }
